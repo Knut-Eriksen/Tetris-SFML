@@ -13,18 +13,20 @@
 class BasePiece {
 public:
     virtual ~BasePiece() = default;
-
-    virtual void drop() = 0;
-    virtual void fastDrop(sf::Keyboard::Key fastDropKey) = 0;
-    virtual void move(sf::Keyboard::Key moveLeft, sf::Keyboard::Key moveRight) = 0;
-    virtual void draw(sf::RenderWindow& window) = 0;
     virtual void rotateClockWise() = 0;
     virtual void rotateCounterClockWise() = 0;
     virtual void rotate() = 0;
 
+    void draw(sf::RenderWindow& window);
+    void move(sf::Keyboard::Key moveLeft, sf::Keyboard::Key moveRight);
+    void fastDrop(sf::Keyboard::Key fastDropKey);
+    void drop();
+
     bool isLanded() const {
         return landed;
     }
+
+
 
 protected:
     sf::RectangleShape block1, block2, block3, block4;

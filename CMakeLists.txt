@@ -23,5 +23,6 @@ add_executable(Tetris_sfml main.cpp
         "Headers and cpp files/cpp/Z.cpp"
         "Headers and cpp files/Headers/Z.h"
         "Headers and cpp files/cpp/functions.cpp"
-        "Headers and cpp files/Headers/functions.h")
+        "Headers and cpp files/Headers/functions.h"
+)
 target_link_libraries(Tetris_sfml PRIVATE sfml-system sfml-network sfml-graphics sfml-window sfml-audio)

@@ -22,6 +22,7 @@ int main() {
     sf::Music music;
     if (!music.openFromFile("Sound/Music.ogg")) return -1;
     music.setVolume(5);
+    music.setLoop(true);
     music.play();
 
     sf::Font font;
