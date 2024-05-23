@@ -1,0 +1,3 @@
+C:/Users/mhjul/ikt103g24v/assignments/solutions/Tetris_sfml/cmake-build-debug/CMakeFiles/Tetris_sfml.dir
+C:/Users/mhjul/ikt103g24v/assignments/solutions/Tetris_sfml/cmake-build-debug/CMakeFiles/edit_cache.dir
+C:/Users/mhjul/ikt103g24v/assignments/solutions/Tetris_sfml/cmake-build-debug/CMakeFiles/rebuild_cache.dir
