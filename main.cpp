@@ -50,6 +50,8 @@ int main() {
                 window.close();
             }
 
+
+
             if (event.type == sf::Event::KeyPressed) {
                 switch (event.key.code) {
                     case sf::Keyboard::X:
@@ -74,6 +76,39 @@ int main() {
                         break;
                 }
             }
+
+
+
+
+            if (event.type == sf::Event::JoystickMoved) {
+                if (event.joystickMove.axis == sf::Joystick::PovX) {
+                    if (event.joystickMove.joystickId == 0) {
+                        for (auto &piece: piecesP1) piece->moveController(0);
+
+                    } if (event.joystickMove.joystickId == 1) {
+                        for (auto &piece: piecesP2) piece->moveController(1);
+                    }
+                }
+            }
+
+            if (event.type == sf::Event::JoystickButtonPressed) {
+                if (event.joystickButton.joystickId == 0 && event.joystickButton.button == 0) {
+                    handleRotation(piecesP1, false);
+                }
+
+                if (event.joystickButton.joystickId == 0 && event.joystickButton.button == 1) {
+                    handleRotation(piecesP1, true);
+                }
+
+                if (event.joystickButton.joystickId == 1 && event.joystickButton.button == 0) {
+                    handleRotation(piecesP2, false);
+                }
+
+                if (event.joystickButton.joystickId == 1 && event.joystickButton.button == 1) {
+                    handleRotation(piecesP2, true);
+                }
+            }
+
         }
 
         if (checkGameOver(landedPositionsP1) && !pause1) {
@@ -96,10 +131,12 @@ int main() {
         for (auto &piece : piecesP1) {
             piece->drop();
             piece->fastDrop(sf::Keyboard::S);
+            piece->fastDropController(0);
         }
         for (auto &piece : piecesP2) {
             piece->drop();
             piece->fastDrop(sf::Keyboard::Down);
+            piece->fastDropController(1);
         }
 
         if (allBlocksLanded(piecesP1)) {

@@ -18,6 +18,8 @@ public:
     virtual void rotate() = 0;
 
     void draw(sf::RenderWindow& window);
+    void fastDropController(int playerID);
+    void moveController(int playerID);
     void move(sf::Keyboard::Key moveLeft, sf::Keyboard::Key moveRight);
     void fastDrop(sf::Keyboard::Key fastDropKey);
     void drop();

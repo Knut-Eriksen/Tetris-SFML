@@ -246,3 +246,52 @@ int BasePiece::clearFullRows(std::vector<sf::Vector2f>& landedPositions, int& sc
 
     return linesCleared;
 }
+
+void BasePiece::fastDropController(int playerID) {
+    const sf::Time fastDropInterval = sf::milliseconds(50);
+    const int fastDropSpeed = 40;
+
+    float dpadY = sf::Joystick::getAxisPosition(playerID, sf::Joystick::PovY);
+
+    if (dpadY < -50) {
+        fastDropping = true;
+        if (dropClock.getElapsedTime() >= fastDropInterval) {
+            if (landed) return;
+
+            if (!checkCollision(0, fastDropSpeed)) {
+                block1.move(0, fastDropSpeed);
+                block2.move(0, fastDropSpeed);
+                block3.move(0, fastDropSpeed);
+                block4.move(0, fastDropSpeed);
+            } else {
+                land();
+            }
+            dropClock.restart();
+        }
+    } else {
+        fastDropping = false;
+    }
+}
+
+void BasePiece::moveController(int playerID) {
+    if (landed || movingDown || fastDropping) return;
+
+    float dpadX = sf::Joystick::getAxisPosition(playerID, sf::Joystick::PovX);
+
+    const float Movement_Speed = 40;
+    if (movementClock.getElapsedTime() > sf::milliseconds(50)) {
+        if (dpadX > 50 && !checkCollision(Movement_Speed, 0)) {
+            block1.move(Movement_Speed, 0);
+            block2.move(Movement_Speed, 0);
+            block3.move(Movement_Speed, 0);
+            block4.move(Movement_Speed, 0);
+        }
+        if (dpadX < -50 && !checkCollision(-Movement_Speed, 0)) {
+            block1.move(-Movement_Speed, 0);
+            block2.move(-Movement_Speed, 0);
+            block3.move(-Movement_Speed, 0);
+            block4.move(-Movement_Speed, 0);
+        }
+        movementClock.restart();
+    }
+}
