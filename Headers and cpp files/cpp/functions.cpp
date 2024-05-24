@@ -17,6 +17,19 @@ void layout(sf::RenderWindow& window) {
     window.draw(layout2);
 }
 
+void layoutSingleplayer(sf::RenderWindow& window) {
+    int height = 10;
+    int width = 20;
+    float multiplier = 40;
+
+    sf::RectangleShape layoutsp(sf::Vector2f(height * multiplier, width * multiplier));
+    layoutsp.setFillColor(sf::Color::Black);
+    layoutsp.setPosition(800, 200);
+
+    window.draw(layoutsp);
+}
+
+
 bool allBlocksLanded(const std::vector<std::unique_ptr<BasePiece>>& pieces) {
     for (const auto& piece : pieces) {
         if (!piece->isLanded()) return false;
@@ -64,18 +77,34 @@ bool checkGameOver(const std::vector<sf::Vector2f>& positions) {
 }
 
 void drawScores(sf::RenderWindow& window, sf::Font& font, int scorePlayer1, int scorePlayer2) {
-    sf::Text scoreText;
-    scoreText.setFont(font);
-    scoreText.setCharacterSize(24);
-    scoreText.setFillColor(sf::Color::Black);
+    if (playerCanPlay[1] == true) {
+        sf::Text scoreText;
+        scoreText.setFont(font);
+        scoreText.setCharacterSize(30);
+        scoreText.setFillColor(sf::Color::White); //Change the collor of the font if it blends in with the background
 
-    scoreText.setString("Player 1 Score: " + std::to_string(scorePlayer1));
-    scoreText.setPosition(400, 100);
-    window.draw(scoreText);
 
-    scoreText.setString("Player 2 Score: " + std::to_string(scorePlayer2));
-    scoreText.setPosition(1400, 100);
-    window.draw(scoreText);
+        scoreText.setString("Player 1 Score: " + std::to_string(scorePlayer1));
+
+        scoreText.setPosition(400, 100);// coordinated for player 1 points
+        window.draw(scoreText);
+
+        scoreText.setString("Player 2 Score: " + std::to_string(scorePlayer2));
+        scoreText.setPosition(1400, 100);
+
+        window.draw(scoreText);
+    }
+    else if (playerCanPlay[1] == false){
+        sf::Text scoreText;
+        scoreText.setFont(font);
+        scoreText.setCharacterSize(30);
+        scoreText.setFillColor(sf::Color::White);
+
+        scoreText.setString("Player Score: " + std::to_string(scorePlayer1));
+
+        scoreText.setPosition(900, 100);// coordinated for player 1 points
+        window.draw(scoreText);
+    }
 }
 
 void drawNextBlock(sf::RenderWindow& window, const sf::Texture& texture, int nextBlockType, sf::Vector2f position) {

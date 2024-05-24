@@ -66,12 +66,13 @@ void BasePiece::fastDrop(sf::Keyboard::Key fastDropKey) {
 }
 
 
-void BasePiece::drop() {
+void BasePiece::drop(bool &InMenu) {
+    if(!InMenu){
     const sf::Time regularDropInterval = sf::milliseconds(700);
     const int dropDistance = 40;
 
     if (dropClock.getElapsedTime() >= regularDropInterval) {
-        if (landed) return;
+        if (landed) return; // if block is landed don't drop
 
         if (!checkCollision(0, dropDistance)) {
             block1.move(0, dropDistance);
@@ -79,19 +80,21 @@ void BasePiece::drop() {
             block3.move(0, dropDistance);
             block4.move(0, dropDistance);
         } else {
-            land();
+            land(); //land if it doesn't move down
         }
 
         dropClock.restart();
+        }
     }
 }
 
-void BasePiece::draw(sf::RenderWindow& window) {
+
+void BasePiece::draw(sf::RenderWindow& window, const sf::Texture& texture) {
     sf::Vector2f blockSize(40, 40);
     for (const auto& pos : landedPositions) {
         sf::RectangleShape block(blockSize);
         block.setPosition(pos);
-        block.setFillColor(sf::Color::Blue);
+        block.setTexture(&texture);
         window.draw(block);
     }
 
@@ -105,10 +108,17 @@ void BasePiece::draw(sf::RenderWindow& window) {
 
 bool BasePiece::checkCollision(float dx, float dy) {
     int minX, maxX;
-    if (playerID == 1) {
-        minX = 300; maxX = 660;
-    } else {
-        minX = 1300; maxX = 1660;
+    if (playerCanPlay[1]) {
+        if (playerID == 1) { //player 1 boundries are 300 and 660 x levels. (from side to side)
+            minX = 300;
+            maxX = 660;
+        } else {
+            minX = 1300;
+            maxX = 1660;
+        }
+    } else if (!playerCanPlay[1]){
+        minX = 800;
+        maxX = 1160;
     }
 
     for (const auto &pos : landedPositions) {
@@ -227,7 +237,7 @@ int BasePiece::clearFullRows(std::vector<sf::Vector2f>& landedPositions, int& sc
     }
 
     landedPositions = newLandedPositions;
-
+    //score system
     int linesCleared = clearedRows.size();
     switch (linesCleared) {
         case 1:

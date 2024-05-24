@@ -129,6 +129,14 @@ build CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\functions.cpp.obj: CX
   TARGET_COMPILE_PDB = CMakeFiles\Tetris_sfml.dir\
   TARGET_PDB = Tetris_sfml.pdb
 
+build CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\Menu.cpp.obj: CXX_COMPILER__Tetris_sfml_unscanned_Debug C$:\Users\mhjul\ikt103g24v\assignments\solutions\Tetris_sfml\Headers$ and$ cpp$ files\cpp\Menu.cpp || cmake_object_order_depends_target_Tetris_sfml
+  FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -std:c++17 -MDd -Zi
+  INCLUDES = -external:IC:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\include -external:W0
+  OBJECT_DIR = CMakeFiles\Tetris_sfml.dir
+  OBJECT_FILE_DIR = CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp
+  TARGET_COMPILE_PDB = CMakeFiles\Tetris_sfml.dir\
+  TARGET_PDB = Tetris_sfml.pdb
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Tetris_sfml
@@ -137,7 +145,7 @@ build CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\functions.cpp.obj: CX
 #############################################
 # Link the executable Tetris_sfml.exe
 
-build Tetris_sfml.exe: CXX_EXECUTABLE_LINKER__Tetris_sfml_Debug CMakeFiles\Tetris_sfml.dir\main.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\O.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\BasePiece.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\I.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\J.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\L.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\T.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\S.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\Z.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\functions.cpp.obj | C$:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-network-d.lib C$:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-graphics-d.lib C$:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-window-d.lib C$:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-audio-d.lib C$:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-system-d.lib
+build Tetris_sfml.exe: CXX_EXECUTABLE_LINKER__Tetris_sfml_Debug CMakeFiles\Tetris_sfml.dir\main.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\O.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\BasePiece.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\I.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\J.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\L.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\T.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\S.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\Z.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\functions.cpp.obj CMakeFiles\Tetris_sfml.dir\Headers_and_cpp_files\cpp\Menu.cpp.obj | C$:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-network-d.lib C$:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-graphics-d.lib C$:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-window-d.lib C$:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-audio-d.lib C$:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-system-d.lib
   FLAGS = /DWIN32 /D_WINDOWS /EHsc /Ob0 /Od /RTC1 -MDd -Zi
   LINK_FLAGS = /machine:x64 /debug /INCREMENTAL /subsystem:console
   LINK_LIBRARIES = C:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-network-d.lib  C:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-graphics-d.lib  C:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-window-d.lib  C:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-audio-d.lib  C:\Users\mhjul\.vcpkg-clion\vcpkg\installed\x64-windows\debug\lib\sfml-system-d.lib  kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib

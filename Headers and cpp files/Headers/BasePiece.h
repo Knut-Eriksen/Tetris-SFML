@@ -1,14 +1,13 @@
-//
-// Created by mhjul on 18.05.2024.
-//
-
 #ifndef TETRIS_SFML_BASEPIECE_H
 #define TETRIS_SFML_BASEPIECE_H
+
+#include <memory>
 
 #include <SFML/Graphics.hpp>
 #include <SFML/Audio.hpp>
 #include <vector>
 #include <map>
+
 
 class BasePiece {
 public:
@@ -17,12 +16,12 @@ public:
     virtual void rotateCounterClockWise() = 0;
     virtual void rotate() = 0;
 
-    void draw(sf::RenderWindow& window);
+    void draw(sf::RenderWindow& window, const sf::Texture& texture);
     void fastDropController(int playerID);
     void moveController(int playerID);
     void move(sf::Keyboard::Key moveLeft, sf::Keyboard::Key moveRight);
     void fastDrop(sf::Keyboard::Key fastDropKey);
-    void drop();
+    void drop(bool &InMenu);
 
     bool isLanded() const {
         return landed;
@@ -30,7 +29,9 @@ public:
 
 
 
+
 protected:
+    bool playerCanPlay[2] = { true, true };
     sf::RectangleShape block1, block2, block3, block4;
     sf::Vector2f drop_speed;
     sf::Clock dropClock, movementClock;
