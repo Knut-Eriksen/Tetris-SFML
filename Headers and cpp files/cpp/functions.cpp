@@ -1,5 +1,7 @@
 #include "../Headers/functions.h"
 
+
+
 void layout(sf::RenderWindow& window) {
     int height = 10;
     int width = 20;
@@ -13,8 +15,22 @@ void layout(sf::RenderWindow& window) {
     layout2.setFillColor(sf::Color::Black);
     layout2.setPosition(1300, 200);
 
+    sf::RectangleShape multiplayerOutline1(sf::Vector2f(height * multiplier + 2, width * multiplier + 2));
+    multiplayerOutline1.setFillColor(sf::Color::Green);
+    multiplayerOutline1.setPosition(299, 199);
+
+    sf::RectangleShape multiplayerOutline2(sf::Vector2f(height * multiplier + 2, width * multiplier + 2));
+    multiplayerOutline2.setFillColor(sf::Color::Green);
+    multiplayerOutline2.setPosition(1299, 199);
+
+    window.draw(multiplayerOutline1);
+    window.draw(multiplayerOutline2);
+
     window.draw(layout1);
     window.draw(layout2);
+
+
+
 }
 
 void layoutSingleplayer(sf::RenderWindow& window) {
@@ -26,7 +42,13 @@ void layoutSingleplayer(sf::RenderWindow& window) {
     layoutsp.setFillColor(sf::Color::Black);
     layoutsp.setPosition(800, 200);
 
+    sf::RectangleShape singleplayerOutine(sf::Vector2f(height * multiplier + 2, width * multiplier + 2));
+    singleplayerOutine.setFillColor(sf::Color::Green);
+    singleplayerOutine.setPosition(799, 199);
+
+    window.draw(singleplayerOutine);
     window.draw(layoutsp);
+
 }
 
 
@@ -43,10 +65,10 @@ void spawnNextBlock(std::vector<std::unique_ptr<BasePiece>>& pieces, sf::Texture
 
     switch (currentBlockType) {
         case 0:
-            pieces.push_back(std::make_unique<O>(texture, landedPositions, 40, x, y, playerID, score));
+            pieces.push_back(std::make_unique<O>(texture, landedPositions, 40, x - 40 , y, playerID, score));
             break;
         case 1:
-            pieces.push_back(std::make_unique<J>(texture, landedPositions, 40, x, y, playerID, score));
+            pieces.push_back(std::make_unique<J>(texture, landedPositions, 40, x - 40, y, playerID, score));
             break;
         case 2:
             pieces.push_back(std::make_unique<I>(texture, landedPositions, 40, x, y, playerID, score));
@@ -55,7 +77,7 @@ void spawnNextBlock(std::vector<std::unique_ptr<BasePiece>>& pieces, sf::Texture
             pieces.push_back(std::make_unique<L>(texture, landedPositions, 40, x, y, playerID, score));
             break;
         case 4:
-            pieces.push_back(std::make_unique<T>(texture, landedPositions, 40, x, y, playerID, score));
+            pieces.push_back(std::make_unique<T>(texture, landedPositions, 40, x - 40, y, playerID, score));
             break;
         case 5:
             pieces.push_back(std::make_unique<S>(texture, landedPositions, 40, x, y, playerID, score));
@@ -100,7 +122,7 @@ void drawScores(sf::RenderWindow& window, sf::Font& font, int scorePlayer1, int 
         scoreText.setCharacterSize(30);
         scoreText.setFillColor(sf::Color::White);
 
-        scoreText.setString("Player Score: " + std::to_string(scorePlayer1));
+        scoreText.setString("Player Score: " + std::to_string(scorePlayer2));
 
         scoreText.setPosition(900, 100);// coordinated for player 1 points
         window.draw(scoreText);

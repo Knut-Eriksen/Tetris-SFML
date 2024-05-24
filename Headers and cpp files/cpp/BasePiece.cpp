@@ -1,6 +1,8 @@
 #include "../Headers/BasePiece.h"
 #include <iostream>
 
+extern bool playerCanPlay[2];
+
 BasePiece::BasePiece(const sf::Texture &texture, std::vector<sf::Vector2f>& positions, int size, int x, int y, int playerID, int& score)
         : landedPositions(positions), playerID(playerID), drop_speed(0, 40), score(score), landed(false) {
     block1 = sf::RectangleShape(sf::Vector2f(size, size));
@@ -107,40 +109,46 @@ void BasePiece::draw(sf::RenderWindow& window, const sf::Texture& texture) {
 }
 
 bool BasePiece::checkCollision(float dx, float dy) {
-    int minX, maxX;
-    if (playerCanPlay[1]) {
-        if (playerID == 1) { //player 1 boundries are 300 and 660 x levels. (from side to side)
-            minX = 300;
-            maxX = 660;
-        } else {
-            minX = 1300;
-            maxX = 1660;
-        }
-    } else if (!playerCanPlay[1]){
+    int minX = 0, maxX = 0;  // Initialize with default values
+
+    if (playerID == 1) { // Player 1
+        minX = 300;
+        maxX = 660;
+    } else if (playerID == 2 && playerCanPlay[1]) { // Player 2 (active)
+        minX = 1300;
+        maxX = 1660;
+    } else if (playerID == 2 && !playerCanPlay[1]) { // Player 2 (inactive)
         minX = 800;
         maxX = 1160;
     }
 
+
+    // Check collision with landed positions
     for (const auto &pos : landedPositions) {
         if ((block1.getPosition().x + dx == pos.x && block1.getPosition().y + dy == pos.y) ||
             (block2.getPosition().x + dx == pos.x && block2.getPosition().y + dy == pos.y) ||
             (block3.getPosition().x + dx == pos.x && block3.getPosition().y + dy == pos.y) ||
             (block4.getPosition().x + dx == pos.x && block4.getPosition().y + dy == pos.y)) {
+            std::cout << "Collision with landed position at: " << pos.x << ", " << pos.y << std::endl;
             return true;
         }
     }
 
+    // Check collision with horizontal boundaries
     if ((dx > 0 && (block1.getPosition().x + dx > maxX || block2.getPosition().x + dx > maxX ||
                     block3.getPosition().x + dx > maxX || block4.getPosition().x + dx > maxX)) ||
         (dx < 0 && (block1.getPosition().x + dx < minX || block2.getPosition().x + dx < minX ||
                     block3.getPosition().x + dx < minX || block4.getPosition().x + dx < minX))) {
+        std::cout << "Collision with horizontal boundary" << std::endl;
         return true;
     }
 
+    // Check collision with bottom boundary
     if (dy > 0 && (block1.getPosition().y + dy + block1.getSize().y > 1000 ||
                    block2.getPosition().y + dy + block2.getSize().y > 1000 ||
                    block3.getPosition().y + dy + block3.getSize().y > 1000 ||
                    block4.getPosition().y + dy + block4.getSize().y > 1000)) {
+        std::cout << "Collision with bottom boundary" << std::endl;
         return true;
     }
 
@@ -166,13 +174,19 @@ bool BasePiece::isWithinBounds(const sf::Vector2f& position) {
     int size = block1.getSize().x;
     int minX, maxX, minY = 100, maxY = 1000;
 
-    if (playerID == 1) {
+    if (playerID == 1) { // Player 1
         minX = 300;
-        maxX = 300 + 10 * 40;
-    } else {
+        maxX = 660;
+    } else if (playerID == 2 && playerCanPlay[1]) { // Player 2 (active)
         minX = 1300;
-        maxX = 1300 + 10 * 40;
+        maxX = 1660;
+    } else if (playerID == 2 && !playerCanPlay[1]) { // Player 2 (inactive)
+        minX = 800;
+        maxX = 1160;
     }
+
+
+
 
     return position.x >= minX && position.x + size <= maxX && position.y >= minY && position.y + size <= maxY;
 }

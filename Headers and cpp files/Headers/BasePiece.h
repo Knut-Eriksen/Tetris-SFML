@@ -11,10 +11,13 @@
 
 class BasePiece {
 public:
+    //~BasePiece is a destructor. It is called when an object of the class is destroyed. Cleans up memory
+    //virtual means the destructor can be overridden in derived classes: I, J, L, O, S, T and Z
+    //eg 'void rotate() override;' in I.h, then void I::rotate() {'rotation code for I'}
     virtual ~BasePiece() = default;
-    virtual void rotateClockWise() = 0;
-    virtual void rotateCounterClockWise() = 0;
-    virtual void rotate() = 0;
+    virtual void rotateClockWise() {}; //used by J, L and T
+    virtual void rotateCounterClockWise() {}; //used by J, L and T
+    virtual void rotate() {}; //used by I, S and Z
 
     void draw(sf::RenderWindow& window, const sf::Texture& texture);
     void fastDropController(int playerID);
@@ -31,7 +34,8 @@ public:
 
 
 protected:
-    bool playerCanPlay[2] = { true, true };
+
+    bool singleplayer = true;
     sf::RectangleShape block1, block2, block3, block4;
     sf::Vector2f drop_speed;
     sf::Clock dropClock, movementClock;

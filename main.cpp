@@ -12,9 +12,27 @@
 std::vector<sf::Vector2f> landedPositionsP1, landedPositionsP2;
 int scorePlayer1 = 0, scorePlayer2 = 0;
 bool playerCanPlay[2] = {false, false};
+bool singleplayer = true;
 
 int main() {
     sf::RenderWindow window(sf::VideoMode(2000, 1200), "Tetris");
+
+    sf::Joystick::Identification id = sf::Joystick::getIdentification(0);
+
+    // Check if the joystick at index 0 is connected
+    bool connected = sf::Joystick::isConnected(0);
+
+    // Get the number of buttons on the joystick at index 0
+    unsigned int buttons = sf::Joystick::getButtonCount(0);
+
+    // Output the identification details
+    std::cout << "Joystick ID: " << id.name.toAnsiString() << std::endl;
+    std::cout << "Vendor ID: " << id.vendorId << std::endl;
+    std::cout << "Product ID: " << id.productId << std::endl;
+
+    // Output the connection status
+    std::cout << "Is Connected: " << (connected ? "Yes" : "No") << std::endl;
+
 
     Menu menu(window.getSize().x, window.getSize().y);
 
@@ -35,7 +53,7 @@ int main() {
 
     sf::Music music;
     if (!music.openFromFile("Sound/Music.ogg")) return -1;
-    music.setVolume(5);
+    music.setVolume(40);
     music.setLoop(true);
     music.play();
 
@@ -45,7 +63,7 @@ int main() {
         return 1;
     }
 
-    // Create a sprite for the background
+    //create a sprite for the background
     sf::Sprite backgroundSprite;
     backgroundSprite.setTexture(backgroundTexture);
 
@@ -65,12 +83,17 @@ int main() {
     int currentBlockTypeP2, nextBlockTypeP2;
 
 
-    // Ensure the blocks are spawned according to game mode
-    if (playerCanPlay[1]) {
-        spawnNextBlock(piecesP1, texture, landedPositionsP1, 500, 200, 1, currentBlockTypeP1, nextBlockTypeP1, scorePlayer1);
-        spawnNextBlock(piecesP2, texture, landedPositionsP2, 1500, 200, 2, currentBlockTypeP2, nextBlockTypeP2, scorePlayer2);
-    } else {
-        spawnNextBlock(piecesP2, texture, landedPositionsP2, 1000, 200, 2, currentBlockTypeP2, nextBlockTypeP2, scorePlayer2);
+    //ensure the blocks are spawned according to game mode
+    if (!inMenu) {
+        if (playerCanPlay[1]) {
+            spawnNextBlock(piecesP1, texture, landedPositionsP1, 500, 200, 1, currentBlockTypeP1, nextBlockTypeP1,
+                           scorePlayer1);
+            spawnNextBlock(piecesP2, texture, landedPositionsP2, 1500, 200, 2, currentBlockTypeP2, nextBlockTypeP2,
+                           scorePlayer2);
+        } else {
+            spawnNextBlock(piecesP2, texture, landedPositionsP2, 1000, 200, 2, currentBlockTypeP2, nextBlockTypeP2,
+                           scorePlayer2);
+        }
     }
 
     nextBlockTypeP1 = rand() % 7;
@@ -101,19 +124,26 @@ int main() {
                             if (selectedIndex == 1 && !menu.PlayPressed) {
                                 menu.PlayPressed = true;
                                 menu.updateMenu();
-                            } else if (selectedIndex == 1) {
+                            } else if (selectedIndex == 1 && menu.PlayPressed) {
+                                // Singleplayer Mode
                                 inMenu = false;
-                                playerCanPlay[1] = false;
+                                singleplayer = true;
                                 playerCanPlay[0] = true;
+                                playerCanPlay[1] = false;
+
                                 spawnNextBlock(piecesP2, texture, landedPositionsP2, 1000, 200, 2, currentBlockTypeP2, nextBlockTypeP2, scorePlayer2);
 
                                 initialSpawnDone = true;
                             } else if (selectedIndex == 2 && menu.PlayPressed) {
+                                //multiplayer Mode
                                 inMenu = false;
-                                playerCanPlay[1] = true;
+                                singleplayer = false;
                                 playerCanPlay[0] = true;
+                                playerCanPlay[1] = true;
+
                                 spawnNextBlock(piecesP1, texture, landedPositionsP1, 500, 200, 1, currentBlockTypeP1, nextBlockTypeP1, scorePlayer1);
                                 spawnNextBlock(piecesP2, texture, landedPositionsP2, 1500, 200, 2, currentBlockTypeP2, nextBlockTypeP2, scorePlayer2);
+
                                 initialSpawnDone = true;
                             } else if (selectedIndex == 2 && !menu.PlayPressed) {
                                 window.close();
@@ -148,6 +178,7 @@ int main() {
                 }
 
                 if (event.type == sf::Event::JoystickMoved) {
+                    std::cout << "Joystick Moved: " << event.joystickMove.joystickId << " Axis: " << event.joystickMove.axis << " Position: " << event.joystickMove.position << std::endl;
                     if (event.joystickMove.axis == sf::Joystick::PovX) {
                         if (event.joystickMove.joystickId == 0) {
                             for (auto &piece : piecesP1) piece->moveController(0);
@@ -159,6 +190,7 @@ int main() {
                 }
 
                 if (event.type == sf::Event::JoystickButtonPressed) {
+                    std::cout << "Joystick Button Pressed: " << event.joystickButton.joystickId << " Button: " << event.joystickButton.button << std::endl;
                     if (event.joystickButton.joystickId == 0 && event.joystickButton.button == 0) {
                         handleRotation(piecesP1, false);
                     }
@@ -177,6 +209,8 @@ int main() {
                 }
             }
         }
+
+
 
         if (checkGameOver(landedPositionsP1) && !pause1) {
             std::cout << "Player 1 game over" << std::endl;
@@ -229,16 +263,30 @@ int main() {
         if (inMenu) {
             menu.draw(window);
         } else {
-            drawNextBlock(window, texture, nextBlockTypeP1, sf::Vector2f(50, 600));
-            drawNextBlock(window, texture, nextBlockTypeP2, sf::Vector2f(1850, 600));
+
+        if (playerCanPlay[1]) {
+            drawNextBlock(window, texture, nextBlockTypeP1, sf::Vector2f(150, 600));
+            drawNextBlock(window, texture, nextBlockTypeP2, sf::Vector2f(1825, 600));
         }
+
+        if (!playerCanPlay[1]) {
+            drawNextBlock(window, texture, nextBlockTypeP2, sf::Vector2f(1325, 600));
+        }
+        }
+
+
+
+
+
 
         if (playerCanPlay[1]) {
             for (auto &piece: piecesP1) piece->draw(window, texture);
         }
         for (auto &piece : piecesP2) piece->draw(window, texture);
 
-        drawScores(window, font, scorePlayer1, scorePlayer2);
+        if (!inMenu) {
+            drawScores(window, font, scorePlayer1, scorePlayer2);
+        }
 
         window.display();
     }

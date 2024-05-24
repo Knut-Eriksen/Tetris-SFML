@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/mhjul/ikt103g24v/assignments/solutions/Tetris_sfml
+# Install script for directory: C:/Users/Knut/ikt103g24v/assignments/solutions/Tetris_sfml
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/mhjul/ikt103g24v/assignments/solutions/Tetris_sfml/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/Knut/ikt103g24v/assignments/solutions/Tetris_sfml/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")
