@@ -4,11 +4,8 @@ O::O(const sf::Texture &texture, std::vector<sf::Vector2f>& positions, int size,
         : BasePiece(texture, positions, size, x, y, playerID, score) {}
 
 
-//empty implementation from basepiece
-void O::rotateClockWise() {}
-
-//empty implementation from basepiece
-void O::rotateCounterClockWise() {}
-
-//empty implementation from basepiece
-void O::rotate(){}
+//setPosition for O piece is the default position declared in BasePiece.cpp
+//block1.setPosition(x, y);
+//block2.setPosition(x + size, y);
+//block3.setPosition(x, y + size);
+//block4.setPosition(x + size, y + size);

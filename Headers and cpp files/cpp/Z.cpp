@@ -35,9 +35,3 @@ void Z::rotate() {
         }
     }
 }
-
-//empty implementation from basepiece
-void Z::rotateClockWise() {}
-
-//empty implementation from basepiece
-void Z::rotateCounterClockWise() {}

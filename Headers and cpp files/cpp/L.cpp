@@ -43,6 +43,3 @@ void L::rotateCounterClockWise() {
         }
     }
 }
-
-//empty implementation from basepiece
-void L::rotate() {}
