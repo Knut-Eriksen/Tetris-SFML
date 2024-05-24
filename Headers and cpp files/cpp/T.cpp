@@ -44,5 +44,3 @@ void T::rotateCounterClockWise() {
     }
 }
 
-//empty implementation from basepiece
-void T::rotate() {}

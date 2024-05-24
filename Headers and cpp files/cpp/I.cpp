@@ -36,9 +36,3 @@ I::I(const sf::Texture &texture, std::vector<sf::Vector2f>& positions, int size,
             }
         }
     }
-
-//empty implementation from basepiece
-void I::rotateClockWise() {}
-
-//empty implementation from basepiece
-void I::rotateCounterClockWise() {}

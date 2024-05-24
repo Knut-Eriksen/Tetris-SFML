@@ -36,8 +36,3 @@ void S::rotate() {
     }
 }
 
-//empty implementation from basepiece
-void S::rotateClockWise() {}
-
-//empty implementation from basepiece
-void S::rotateCounterClockWise() {}

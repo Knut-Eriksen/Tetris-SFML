@@ -43,6 +43,3 @@ void J::rotateCounterClockWise() {
         }
     }
 }
-
-//empty implementation from basepiece
-void J::rotate() {}
