@@ -108,7 +108,7 @@ void drawScores(sf::RenderWindow& window, sf::Font& font, int scorePlayer1, int 
 
         scoreText.setString("Player 1 Score: " + std::to_string(scorePlayer1));
 
-        scoreText.setPosition(400, 100);// coordinated for player 1 points
+        scoreText.setPosition(400, 100);
         window.draw(scoreText);
 
         scoreText.setString("Player 2 Score: " + std::to_string(scorePlayer2));
@@ -124,7 +124,7 @@ void drawScores(sf::RenderWindow& window, sf::Font& font, int scorePlayer1, int 
 
         scoreText.setString("Player Score: " + std::to_string(scorePlayer2));
 
-        scoreText.setPosition(900, 100);// coordinated for player 1 points
+        scoreText.setPosition(900, 100);
         window.draw(scoreText);
     }
 }

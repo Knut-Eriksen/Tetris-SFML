@@ -189,5 +189,23 @@ C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Graphics/Gls
 C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Graphics/Sprite.hpp
 C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Graphics/Text.hpp
 C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Graphics/VertexBuffer.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio.hpp.
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/InputSoundFile.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/Export.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/Listener.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/Music.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/SoundStream.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/SoundSource.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/AlResource.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/OutputSoundFile.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/Sound.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/SoundBuffer.hpp
+C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/include/set
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/SoundBufferRecorder.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/SoundRecorder.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/SoundFileFactory.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/SoundFileFactory.inl
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/SoundFileReader.hpp
+C:/Users/Knut/.vcpkg-clion/vcpkg/installed/x64-windows/include/SFML/Audio/SoundFileWriter.hpp
 C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/include/iostream
 C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.39.33519/include/istream

@@ -2,6 +2,7 @@
 #define TETRIS_SFML_MENU_H
 
 #include "SFML/Graphics.hpp"
+#include "SFML/Audio.hpp."
 #include "iostream"
 
 class Menu {
@@ -15,12 +16,13 @@ public:
     void moveUp();
     void moveDown();
     int getSelectedIndex() const;
-    void updateMenu();  // Update the menu based on the current state
+    void updateMenu();
+    void resetMenu();
 
 private:
     int selectedIndex;
     sf::Font font;
-    sf::Text menu[3]; // 0: Title, 1: Play/Singleplayer, 2: Exit/Multiplayer
+    sf::Text menu[3];
     float width, height;
 };
 

@@ -6,18 +6,17 @@ extern bool playerCanPlay[2];
 BasePiece::BasePiece(const sf::Texture &texture, std::vector<sf::Vector2f>& positions, int size, int x, int y, int playerID, int& score)
         : landedPositions(positions), playerID(playerID), drop_speed(0, 40), score(score), landed(false) {
     block1 = sf::RectangleShape(sf::Vector2f(size, size));
-    block2 = sf::RectangleShape(sf::Vector2f(size, size));
+    block2 = sf::RectangleShape(sf::Vector2f(size, size));//makes the four block for a shape
     block3 = sf::RectangleShape(sf::Vector2f(size, size));
     block4 = sf::RectangleShape(sf::Vector2f(size, size));
 
-
-    block1.setTexture(&texture);
+    block1.setTexture(&texture);//sets the texture for the blocks
     block2.setTexture(&texture);
     block3.setTexture(&texture);
     block4.setTexture(&texture);
 
     block1.setPosition(x, y);
-    block2.setPosition(x + size, y);
+    block2.setPosition(x + size, y);//sets up the formation of the blocks to make a shape
     block3.setPosition(x, y + size);
     block4.setPosition(x + size, y + size);
 }
@@ -25,16 +24,16 @@ BasePiece::BasePiece(const sf::Texture &texture, std::vector<sf::Vector2f>& posi
 void BasePiece::move(sf::Keyboard::Key moveLeft, sf::Keyboard::Key moveRight) {
     if (landed || movingDown || fastDropping) return;
 
-    const float Movement_Speed = 40;
-    if (movementClock.getElapsedTime() > sf::milliseconds(50)) {
+    const float Movement_Speed = 40; //move 40 pixels, one block size if movement is detected
+    if (movementClock.getElapsedTime() > sf::milliseconds(50)) { //if moving side to side, movement will occur every 50 ms if holding down.
         if (sf::Keyboard::isKeyPressed(moveRight) && !checkCollision(Movement_Speed, 0)) {
-            block1.move(Movement_Speed, 0);
+            block1.move(Movement_Speed, 0);//moves 40 pixels to the right
             block2.move(Movement_Speed, 0);
             block3.move(Movement_Speed, 0);
             block4.move(Movement_Speed, 0);
         }
         if (sf::Keyboard::isKeyPressed(moveLeft) && !checkCollision(-Movement_Speed, 0)) {
-            block1.move(-Movement_Speed, 0);
+            block1.move(-Movement_Speed, 0);//moves 40 pixels to the left
             block2.move(-Movement_Speed, 0);
             block3.move(-Movement_Speed, 0);
             block4.move(-Movement_Speed, 0);
@@ -44,13 +43,13 @@ void BasePiece::move(sf::Keyboard::Key moveLeft, sf::Keyboard::Key moveRight) {
 }
 
 void BasePiece::fastDrop(sf::Keyboard::Key fastDropKey) {
-    const sf::Time fastDropInterval = sf::milliseconds(50);
+    const sf::Time fastDropInterval = sf::milliseconds(50);//when dropping fast it drops 40 pixels evey 50 ms
     const int fastDropSpeed = 40;
 
     if (sf::Keyboard::isKeyPressed(fastDropKey)) {
         fastDropping = true;
         if (dropClock.getElapsedTime() >= fastDropInterval) {
-            if (landed) return;
+            if (landed) return;//if the block is landed dont drop further
 
             if (!checkCollision(0, fastDropSpeed)) {
                 block1.move(0, fastDropSpeed);
@@ -74,7 +73,7 @@ void BasePiece::drop(bool &InMenu) {
     const int dropDistance = 40;
 
     if (dropClock.getElapsedTime() >= regularDropInterval) {
-        if (landed) return; // if block is landed don't drop
+        if (landed) return;
 
         if (!checkCollision(0, dropDistance)) {
             block1.move(0, dropDistance);
@@ -91,7 +90,7 @@ void BasePiece::drop(bool &InMenu) {
 }
 
 
-void BasePiece::draw(sf::RenderWindow& window, const sf::Texture& texture) {
+void BasePiece::draw(sf::RenderWindow& window, const sf::Texture& texture) {//draw the blocks
     sf::Vector2f blockSize(40, 40);
     for (const auto& pos : landedPositions) {
         sf::RectangleShape block(blockSize);
@@ -108,22 +107,22 @@ void BasePiece::draw(sf::RenderWindow& window, const sf::Texture& texture) {
     }
 }
 
-bool BasePiece::checkCollision(float dx, float dy) {
-    int minX = 0, maxX = 0;  // Initialize with default values
+bool BasePiece::checkCollision(float dx, float dy) {//checks collisions inside the layouts
+    int minX = 0, maxX = 0;
 
-    if (playerID == 1) { // Player 1
+    if (playerID == 1) {//player one has boundries 300 and 660 x
         minX = 300;
         maxX = 660;
-    } else if (playerID == 2 && playerCanPlay[1]) { // Player 2 (active)
+    } else if (playerID == 2 && playerCanPlay[1]) {//player 2 has these boundries if its multiplayer
         minX = 1300;
         maxX = 1660;
-    } else if (playerID == 2 && !playerCanPlay[1]) { // Player 2 (inactive)
+    } else if (playerID == 2 && !playerCanPlay[1]) {//theseboundries if singleplayer
         minX = 800;
         maxX = 1160;
     }
 
 
-    // Check collision with landed positions
+
     for (const auto &pos : landedPositions) {
         if ((block1.getPosition().x + dx == pos.x && block1.getPosition().y + dy == pos.y) ||
             (block2.getPosition().x + dx == pos.x && block2.getPosition().y + dy == pos.y) ||
@@ -134,7 +133,7 @@ bool BasePiece::checkCollision(float dx, float dy) {
         }
     }
 
-    // Check collision with horizontal boundaries
+
     if ((dx > 0 && (block1.getPosition().x + dx > maxX || block2.getPosition().x + dx > maxX ||
                     block3.getPosition().x + dx > maxX || block4.getPosition().x + dx > maxX)) ||
         (dx < 0 && (block1.getPosition().x + dx < minX || block2.getPosition().x + dx < minX ||
@@ -143,7 +142,6 @@ bool BasePiece::checkCollision(float dx, float dy) {
         return true;
     }
 
-    // Check collision with bottom boundary
     if (dy > 0 && (block1.getPosition().y + dy + block1.getSize().y > 1000 ||
                    block2.getPosition().y + dy + block2.getSize().y > 1000 ||
                    block3.getPosition().y + dy + block3.getSize().y > 1000 ||
@@ -170,17 +168,17 @@ bool BasePiece::positionExists(const sf::Vector2f &position, const std::vector<s
     return false;
 }
 
-bool BasePiece::isWithinBounds(const sf::Vector2f& position) {
+bool BasePiece::isWithinBounds(const sf::Vector2f& position) {//checks if the blocks will be withing the layout after rotating
     int size = block1.getSize().x;
     int minX, maxX, minY = 100, maxY = 1000;
 
-    if (playerID == 1) { // Player 1
+    if (playerID == 1) {
         minX = 300;
         maxX = 660;
-    } else if (playerID == 2 && playerCanPlay[1]) { // Player 2 (active)
+    } else if (playerID == 2 && playerCanPlay[1]) {
         minX = 1300;
         maxX = 1660;
-    } else if (playerID == 2 && !playerCanPlay[1]) { // Player 2 (inactive)
+    } else if (playerID == 2 && !playerCanPlay[1]) {
         minX = 800;
         maxX = 1160;
     }
@@ -216,7 +214,7 @@ int BasePiece::clearFullRows(std::vector<sf::Vector2f>& landedPositions, int& sc
         }
     }
 
-    if (!clearedRows.empty()) {
+    if (!clearedRows.empty()) {//adds a sound for clearing rows
         sf::SoundBuffer buffer;
         if (!buffer.loadFromFile("Sound/clear.wav")) {
             std::cerr << "Failed to load clear.wav" << std::endl;
@@ -225,10 +223,10 @@ int BasePiece::clearFullRows(std::vector<sf::Vector2f>& landedPositions, int& sc
 
         sf::Sound sound;
         sound.setBuffer(buffer);
-        sound.setVolume(25);
+        sound.setVolume(75);
         sound.play();
 
-        // Wait while the sound is playing.
+        //wait while the sound is playing.
         while (sound.getStatus() == sf::Sound::Playing) {
             sf::sleep(sf::milliseconds(100));
         }
@@ -252,7 +250,7 @@ int BasePiece::clearFullRows(std::vector<sf::Vector2f>& landedPositions, int& sc
 
     landedPositions = newLandedPositions;
     //score system
-    int linesCleared = clearedRows.size();
+    int linesCleared = clearedRows.size();//the score system based on how many lines cleared
     switch (linesCleared) {
         case 1:
             score += 100;
@@ -271,7 +269,7 @@ int BasePiece::clearFullRows(std::vector<sf::Vector2f>& landedPositions, int& sc
     return linesCleared;
 }
 
-void BasePiece::fastDropController(int playerID) {
+void BasePiece::fastDropController(int playerID) {//fastdropping for controller
     const sf::Time fastDropInterval = sf::milliseconds(50);
     const int fastDropSpeed = 40;
 
@@ -297,7 +295,7 @@ void BasePiece::fastDropController(int playerID) {
     }
 }
 
-void BasePiece::moveController(int playerID) {
+void BasePiece::moveController(int playerID) {//movement for controller
     if (landed || movingDown || fastDropping) return;
 
     float dpadX = sf::Joystick::getAxisPosition(playerID, sf::Joystick::PovX);

@@ -6,14 +6,12 @@ Menu::Menu(float width, float height) : width(width), height(height) {
         exit(1);
     }
 
-    // Initialize common properties for menu items
     menu[0].setFont(font);
     menu[0].setFillColor(sf::Color::White);
     menu[0].setString("Tetris");
     menu[0].setCharacterSize(120);
     menu[0].setPosition(sf::Vector2f(width / 2 - menu[0].getGlobalBounds().width / 2, height / 4));
 
-    // Initialize other menu options
     updateMenu();
 
     selectedIndex = 1;
@@ -31,7 +29,6 @@ void Menu::updateMenu() {
 
     for (int i = 1; i < 3; i++) {
         menu[i].setFont(font);
-        //menu[i].setFillColor(i == selectedIndex ? sf::Color::Green : sf::Color::White);
         menu[i].setCharacterSize(50);
         menu[i].setPosition(sf::Vector2f(width / 2 - menu[i].getGlobalBounds().width / 2, height / 2 + (i - 1) * 100));
     }
@@ -61,4 +58,10 @@ void Menu::moveDown() {
 
 int Menu::getSelectedIndex() const {
     return selectedIndex;
+}
+
+void Menu::resetMenu() {
+    PlayPressed = false;
+    selectedIndex = 1;
+    updateMenu();
 }
