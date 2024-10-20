@@ -1,6 +1,6 @@
-*.cpp linguist-detectable=true  
-*.Makefile linguist-detectable=false  
+Makefile linguist-detectable=false  
 *.Make linguist-detectable=false  
+*.cpp linguist-detectable=true  
 *.js linguist-detectable=false  
 *.html linguist-detectable=false  
-*.xml linguist-detectable=false 
+*.xml linguist-detectable=false
