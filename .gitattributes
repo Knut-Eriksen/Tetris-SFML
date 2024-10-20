@@ -11,6 +11,10 @@
 Makefile linguist-language=ignore  
 makefile linguist-language=ignore  
 *.make linguist-language=ignore  
+*.mk linguist-language=ignore
+*.txt linguist-language=ignore  
+
+
 
 # Ignore CMake files
 CMakeLists.txt linguist-language=ignore  
