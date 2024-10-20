@@ -1,4 +1,5 @@
-Makefile linguist-detectable=false  
+Makefile linguist-language=ignore
+makefile linguist-language=ignore 
 *.make linguist-detectable=false
 CMakeLists.txt linguist-detectable=false
 *.cmake linguist-detectable=false
