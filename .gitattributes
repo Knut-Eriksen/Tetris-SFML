@@ -1,6 +1,13 @@
-Makefile linguist-language=ignore
-makefile linguist-language=ignore 
-*.make linguist-detectable=false
-CMakeLists.txt linguist-detectable=false
-*.cmake linguist-detectable=false
 *.cpp linguist-detectable=true  
+*.js linguist-detectable=false  
+*.html linguist-detectable=false  
+*.xml linguist-detectable=false  
+
+# Ignore Makefiles
+Makefile linguist-language=ignore  
+makefile linguist-language=ignore  
+*.make linguist-language=ignore  
+
+# Ignore CMake files
+CMakeLists.txt linguist-language=ignore  
+*.cmake linguist-language=ignore
